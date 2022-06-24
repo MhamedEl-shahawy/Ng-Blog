@@ -1,0 +1,19 @@
+<div>
+    <form  [formGroup]="form" (ngSubmit)="addArticle($event)">
+      <div>
+      <label  for="title">Title Article</label>
+      <input   formControlName="titleInput" type="text" id="title" name="title" placeholder="Your Title..">
+      <div *ngIf="form.get('titleInput')?.pending">writting..</div>
+      <div  style="padding:0" *ngIf="form.get('titleInput')?.touched &&form.get('titleInput')?.invalid">
+         <p class="error" *ngIf="form.get('titleInput')?.errors?.['minlength']">sorry length should be at least {{form.get('titleInput')?.errors?.['minlength']?.requiredLength}}</p>
+         <p class="error" *ngIf="form.get('titleInput')?.errors?.['required']">sorry this input is required</p>
+         <p class="error" *ngIf="form.get('titleInput')?.errors?.['shouldChange']">sorry this user used afterthat</p>
+      </div>
+    </div>
+    <div>
+      <label for="desc">Description</label>
+      <textarea type="text" id="desc" name="desc" placeholder="Your Description.."></textarea>
+      <input type="submit" value="Submit">
+    </div> 
+    </form>
+  </div>

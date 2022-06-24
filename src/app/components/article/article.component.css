@@ -1,0 +1,6 @@
+.img--align-left {
+    float: left;
+   /* replaces the style previously inherited by the browser */
+    margin: 0 16px 16px -20px;
+    border-radius: 50%;
+}
