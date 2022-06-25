@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {CannotConatinSpace} from "./form.validator";
+import { Article } from 'src/app/models/article.model';
+import { Component, Input, OnInit } from '@angular/core';
+import {shouldChange} from "./form.validator";
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,19 +9,27 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form-post.component.css']
 })
 export class FormPostComponent implements OnInit {
-  form = new FormGroup({
-    titleInput:new FormControl('',[
-      Validators.required,
-      Validators.minLength(4),
-      CannotConatinSpace.shouldChange
-    ]),
-   
-   });
+  @Input() articleData?:any;
+  form:any;
   constructor() { }
 
   ngOnInit(): void {
+    
   }
   addArticle(e:any){
     e.preventDefault();
+    console.log(this.articleData)
+
+  }
+  ngOnChanges(){
+    this.form = new FormGroup({
+      titleInput:new FormControl('',[
+        Validators.required,
+        Validators.minLength(4),
+        shouldChange(this.articleData)
+      ]),
+     
+     });
+
   }
 }
